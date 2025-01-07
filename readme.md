@@ -1,6 +1,6 @@
-[Licensing, bug reporting and contact information.](https://git.thespeshalplatoon.com/A3) 
+[Licensing, bug reporting and contact information.]([https://github.com/TheSpeshalPlatoon/A3-Core](https://github.com/TheSpeshalPlatoon)) 
 
-This addons relies on components from tsp_core which can be found in the [Core Repository](https://git.thespeshalplatoon.com/A3/Core).
+This addons relies on components from tsp_core which can be found in the [Core Repository](https://github.com/TheSpeshalPlatoon/A3-Core).
 
 [<img src="https://core.thespeshalplatoon.com/img/steam_small.png"> Animate](https://steamcommunity.com/sharedfiles/filedetails/?id=3283612524)  
 [<img src="https://core.thespeshalplatoon.com/img/steam_small.png"> Animate - Radio](https://steamcommunity.com/sharedfiles/filedetails/?id=3283635033)
