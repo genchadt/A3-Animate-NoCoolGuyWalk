@@ -157,8 +157,10 @@ tsp_fnc_animate_sling = {  //-- FUCK FUCK FUCK FUCK I DONT LIKE IT MAKE IT GO AW
             params ["_unit", "_unarmed"];
             _rifle = (getUnitLoadout _unit)#0; _holder = [_unit, primaryWeapon _unit, true, false] call tsp_fnc_throw; _holder setDamage 1; 
             _holder attachTo [_unit, tsp_cba_animate_sling_pos#0, "Spine3", true]; [_holder, tsp_cba_animate_sling_pos#1] call BIS_fnc_setObjectRotation;
-            if (_unarmed) then {_unit action ["SWITCHWEAPON", _unit, _unit, -1]; [_unit, "tsp_common_stop"] remoteExec ["playActionNow"]};
-            _unit setVariable ["tsp_slung", [_holder, _rifle]]; 
+            if (_unarmed) then {_unit action ["SWITCHWEAPON", _unit, _unit, -1]};
+            if (_unarmed) then {[_unit, animationState _unit regexReplace ["wrfl", "wnon"] regexReplace ["sras", "snon"]] remoteExec ["switchMove"]};
+            if (_unarmed) then {[_unit, "tsp_common_stop"] remoteExec ["playActionNow"]};
+            _unit setVariable ["tsp_slung", [_holder, _rifle]];
         }];
         _time = _time + 0.3;
     };

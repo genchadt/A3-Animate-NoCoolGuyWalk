@@ -28,6 +28,7 @@
 ["tsp_cba_animate_sling_add", "CHECKBOX", ["Add Slings", "Attempt to add slings to all units."], ["TSP Animate", "Sling"], false] call CBA_fnc_addSetting;
 ["tsp_cba_animate_sling_sprint", "CHECKBOX", ["Enable Sprinting", "Disable sprinting with slung weapon."], ["TSP Animate", "Sling"], false] call CBA_fnc_addSetting;
 ["tsp_cba_animate_sling_style", "LIST", ["Sling Style", "What gesture set to use."], ["TSP Animate", "Sling"], [["","adhd","israeli"], ["Simpleton","ADHD","Israeli"], 1]] call CBA_fnc_addSetting;
+["tsp_cba_animate_sling_required", "CHECKBOX", ["Require Sling", "Whether a sling is required to use sling system."], ["TSP Animate", "Sling"], true] call CBA_fnc_addSetting;
 
 ["tsp_cba_animate_sound", "SLIDER", ["Sound Volume", "Sound effect volume."], "TSP Animate", [0, 10, 1], false] call CBA_fnc_addSetting;
 ["tsp_cba_animate_shake", "SLIDER", ["Shake Intensity", "Camera shake intensity."], "TSP Animate", [0, 10, 1], false] call CBA_fnc_addSetting;
@@ -73,8 +74,8 @@
 
 ["TSP Animate", "tsp_animate_sling_sling", "Sling", {
     [currentWeapon playa, primaryWeapon playa, handgunWeapon playa, playa getVariable ["tsp_slung",[]]] params ["_current", "_primary", "_handgun", "_slung"]; if (!tsp_cba_animate_sling) exitWith {};
-    if (_current == _primary && _primary != "" && count _slung > 1 && stance playa in ["STAND","CROUCH"] && "tsp_sling" in items playa) exitWith {[playa, true, false, false, false, true] call tsp_fnc_animate_sling};  //-- Swap
-    if (_current == _primary && _primary != "" && count _slung < 1 && stance playa in ["STAND","CROUCH"] && "tsp_sling" in items playa) exitWith {[playa, true] call tsp_fnc_animate_sling};  //-- Sling
+    if (_current == _primary && _primary != "" && count _slung > 1 && stance playa in ["STAND","CROUCH"] && ("tsp_sling" in items playa || !tsp_cba_animate_sling_required)) exitWith {[playa, true, false, false, false, true] call tsp_fnc_animate_sling};  //-- Swap
+    if (_current == _primary && _primary != "" && count _slung < 1 && stance playa in ["STAND","CROUCH"] && ("tsp_sling" in items playa || !tsp_cba_animate_sling_required)) exitWith {[playa, true] call tsp_fnc_animate_sling};  //-- Sling
     if (count _slung > 1 && stance playa in ["STAND","CROUCH"] && primaryWeapon playa == "") exitWith {[playa, false, _current == _handgun, false, false, true] call tsp_fnc_animate_sling};  //-- Unsling
 }, {}, [2, [false, false, false]]] call CBA_fnc_addKeybind;
 

@@ -68,7 +68,7 @@ tsp_old = currentWeapon playa; tsp_future = [];
 addMissionEventHandler ["Draw3D", {
     if (count tsp_future > 0) exitWith {{_x params ["_time", "_params", "_code"]; if (time > _time) then {_params call _code; tsp_future = tsp_future select {_x#2 isNotEqualTo _code}}} forEach tsp_future};
     [tsp_old, currentWeapon playa] params ["_old", "_new"]; tsp_old = _new;  //-- Exit if no switch or unarmed or no sling
-	if (currentWeapon playa == _old || _new == "" || !("tsp_sling" in items playa) || !tsp_cba_animate_sling || !(stance playa in ["CROUCH","STAND"]) || (playa getVariable ["tsp_slung", []]) isNotEqualTo []) exitWith {};
+	if (currentWeapon playa == _old || _new == "" || !("tsp_sling" in items playa || !tsp_cba_animate_sling_required) || !tsp_cba_animate_sling || !(stance playa in ["CROUCH","STAND"]) || (playa getVariable ["tsp_slung", []]) isNotEqualTo []) exitWith {};
     if (_new == secondaryWeapon playa && _old == primaryWeapon playa && _old != "") exitWith {[playa, true, false, false, true] call tsp_fnc_animate_sling};  //-- Rifle > launcher
     if (_new == handgunWeapon playa && _old == primaryWeapon playa && _old != "") exitWith {[playa, true, false, true] call tsp_fnc_animate_sling};          //-- Rifle > pistol
 }];
