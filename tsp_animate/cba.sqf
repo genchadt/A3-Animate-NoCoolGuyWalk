@@ -2,10 +2,10 @@
 
 //-- SETTINGS
 ["tsp_cba_animate_tactical", "CHECKBOX", ["Tactical Stance System", "Enable/Disable tactical stance system."], ["TSP Animate", "Tactical"], true] call CBA_fnc_addSetting;
-["tsp_cba_animate_style", "LIST", ["Tactical Style", "What gesture set to use."], ["TSP Animate", "Tactical"], [["","loose_","butt_"], ["Basic Bitch","Loosey Goosey","Tip to Butt"], 0]] call CBA_fnc_addSetting;
-["tsp_cba_animate_style_autorifle", "LIST", ["Tactical Style (Autorifle)", "What gesture set to use."], ["TSP Animate", "Tactical"], [["","loose_","butt_"], ["Basic Bitch","Loosey Goosey","Tip to Butt"], 1]] call CBA_fnc_addSetting;
-["tsp_cba_animate_style_sniper", "LIST", ["Tactical Style (Sniper)", "What gesture set to use."], ["TSP Animate", "Tactical"], [["","loose_","butt_"], ["Basic Bitch","Loosey Goosey","Tip to Butt"], 1]] call CBA_fnc_addSetting;
-["tsp_cba_animate_style_shotgun", "LIST", ["Tactical Style (Shotgun)", "What gesture set to use."], ["TSP Animate", "Tactical"], [["","loose_","butt_"], ["Basic Bitch","Loosey Goosey","Tip to Butt"], 2]] call CBA_fnc_addSetting;
+["tsp_cba_animate_style", "LIST", ["Tactical Style", "What gesture set to use."], ["TSP Animate", "Tactical"], [["","loose_","butt_","retro_"], ["Basic Bitch","Loosey Goosey","Tip to Butt","Retro"], 0]] call CBA_fnc_addSetting;
+["tsp_cba_animate_style_autorifle", "LIST", ["Tactical Style (Autorifle)", "What gesture set to use."], ["TSP Animate", "Tactical"], [["","loose_","butt_","retro_"], ["Basic Bitch","Loosey Goosey","Tip to Butt","Retro"], 1]] call CBA_fnc_addSetting;
+["tsp_cba_animate_style_sniper", "LIST", ["Tactical Style (Sniper)", "What gesture set to use."], ["TSP Animate", "Tactical"], [["","loose_","butt_","retro_"], ["Basic Bitch","Loosey Goosey","Tip to Butt","Retro"], 1]] call CBA_fnc_addSetting;
+["tsp_cba_animate_style_shotgun", "LIST", ["Tactical Style (Shotgun)", "What gesture set to use."], ["TSP Animate", "Tactical"], [["","loose_","butt_","retro_"], ["Basic Bitch","Loosey Goosey","Tip to Butt","Retro"], 2]] call CBA_fnc_addSetting;
 
 ["tsp_cba_animate_tap", "CHECKBOX", ["Tap/Squeeze Animation", "Enable/disable animation leg/shoulder queeze."], ["TSP Animate", "Tactical"], true] call CBA_fnc_addSetting;
 ["tsp_cba_animate_door", "CHECKBOX", ["Door Opening Animation", "Enable/disable animation when opening doors."], ["TSP Animate", "Tactical"], true] call CBA_fnc_addSetting;
@@ -72,14 +72,19 @@
     if (tsp_cba_animate_cant) then {[playa, "cant", "lnon"] call tsp_fnc_animate_tactical};
 }, {}, [0xF1, [false, true, false]]] call CBA_fnc_addKeybind;
 
-["TSP Animate", "tsp_animate_sling_sling", "Sling", {
+["TSP Animate", "tsp_animate_sling_sling", "Sling/Unsling/Swap", {
     [currentWeapon playa, primaryWeapon playa, handgunWeapon playa, playa getVariable ["tsp_slung",[]]] params ["_current", "_primary", "_handgun", "_slung"]; if (!tsp_cba_animate_sling) exitWith {};
     if (_current == _primary && _primary != "" && count _slung > 1 && stance playa in ["STAND","CROUCH"] && ("tsp_sling" in items playa || !tsp_cba_animate_sling_required)) exitWith {[playa, true, false, false, false, true] call tsp_fnc_animate_sling};  //-- Swap
     if (_current == _primary && _primary != "" && count _slung < 1 && stance playa in ["STAND","CROUCH"] && ("tsp_sling" in items playa || !tsp_cba_animate_sling_required)) exitWith {[playa, true] call tsp_fnc_animate_sling};  //-- Sling
     if (count _slung > 1 && stance playa in ["STAND","CROUCH"] && primaryWeapon playa == "") exitWith {[playa, false, _current == _handgun, false, false, true] call tsp_fnc_animate_sling};  //-- Unsling
 }, {}, [2, [false, false, false]]] call CBA_fnc_addKeybind;
 
-["TSP Animate", "tsp_animate_sling_unsling", "Unsling", {
+["TSP Animate", "tsp_animate_sling_slingo", "Sling", {
+    [currentWeapon playa, primaryWeapon playa, handgunWeapon playa, playa getVariable ["tsp_slung",[]]] params ["_current", "_primary", "_handgun", "_slung"]; if (!tsp_cba_animate_sling) exitWith {};
+    if (_current == _primary && _primary != "" && count _slung < 1 && stance playa in ["STAND","CROUCH"] && ("tsp_sling" in items playa || !tsp_cba_animate_sling_required)) exitWith {[playa, true] call tsp_fnc_animate_sling};  //-- Sling
+}, {}, [0, [false, false, false]]] call CBA_fnc_addKeybind;
+
+["TSP Animate", "tsp_animate_sling_unslingo", "Unsling", {
     [currentWeapon playa, primaryWeapon playa, handgunWeapon playa, playa getVariable ["tsp_slung",[]]] params ["_current", "_primary", "_handgun", "_slung"]; if (!tsp_cba_animate_sling) exitWith {};
     if (count _slung > 1 && stance playa in ["STAND","CROUCH"]) exitWith {[playa, false, _current == _handgun, false, false, true] call tsp_fnc_animate_sling};  //-- Unsling
 }, {}, [0, [false, false, false]]] call CBA_fnc_addKeybind;

@@ -585,7 +585,7 @@ class CfgGesturesMale {
 		class tsp_animate_sling_unsling: tsp_animate_sling_sling {file = "tsp_animate\sling\unsling.rtm";};
 		class tsp_animate_sling_swap: tsp_animate_sling_unsling {file = "tsp_animate\sling\swap.rtm"; speed = 1.2; rightHandIKCurve[] = {1}; leftHandIKCurve[] = {1};};
 		class tsp_animate_sling_check: tsp_animate_sling_sling {file = "tsp_animate\sling\check.rtm"; rightHandIKCurve[] = {1}; leftHandIKCurve[] = {1};};
-		class tsp_animate_sling_draw: tsp_animate_tactical_compress_wpst_lhig {interpolationSpeed = 10; speed = 5; looped = false; file = "tsp_animate\sling\draw.rtm";};
+		class tsp_animate_sling_draw: tsp_animate_tactical_compress_wpst_lhig {interpolationSpeed = 10; speed = 3; looped = false; file = "tsp_animate\sling\draw.rtm";};
 		class tsp_animate_sling_draw_israeli: tsp_animate_sling_draw {speed = 2; file = "tsp_animate\sling\draw_israeli.rtm";};
 		class tsp_animate_sling_holster: tsp_animate_sling_draw {file = "tsp_animate\sling\holster.rtm"; speed = 1.5;};
 		class tsp_animate_sling_sheath: tsp_animate_sling_draw {file = "tsp_animate\sling\sheath.rtm"; speed = 2;};

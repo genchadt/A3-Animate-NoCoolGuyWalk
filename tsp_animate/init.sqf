@@ -18,7 +18,14 @@ player addEventHandler ["AnimStateChanged", {
     [_unit, ""] call tsp_fnc_animate_tactical;
     [_unit, _anim] call tsp_fnc_animate_walk;
 }];
-["unit", {params ["_new", "_old"]; if (!isPlayer _new) then {_new addEventHandler ["AnimStateChanged", {params ["_unit", "_anim"]; [_unit, _anim] call tsp_fnc_animate_walk}]}}] call CBA_fnc_addPlayerEventHandler;
+
+//-- Compatibility with selectPlayer / remoteControl
+player setVariable ["tsp_animate_events", true];
+["unit", {
+    params ["_new", "_old"]; 
+    if (_new getVariable ["tsp_animate_events", false]) exitWith {}; _new setVariable ["tsp_animate_events", true];
+    _new addEventHandler ["AnimStateChanged", {params ["_unit", "_anim"]; [_unit, _anim] call tsp_fnc_animate_walk}];
+}] call CBA_fnc_addPlayerEventHandler;
 
 //-- Utility handlers
 ["if (tsp_cba_animate_uav && 'Open UAV' in (_this#4)) then {[playa,0.5,'A3\Missions_F_Oldman\Data\sound\beep.ogg',0.1] call tsp_fnc_animate_effect; [playa, 'tsp_animate_map_in', 'tsp_animate_map_loop', '\A3\Props_F_Exp_A\Military\Equipment\Tablet_02_F.p3d', [-0.07,0.01,-0.05], [200,-50,10], {isNull findDisplay 160}] spawn tsp_fnc_gesture_item};"] spawn tsp_fnc_scroll;
