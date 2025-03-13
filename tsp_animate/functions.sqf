@@ -139,7 +139,7 @@ tsp_fnc_animate_effect = {
     [_shake*tsp_cba_animate_shake, 2, 5] remoteExec ["tsp_fnc_shake", _unit];
 };
 
-tsp_fnc_animate_sling = {  //-- FUCK FUCK FUCK FUCK I DONT LIKE IT MAKE IT GO AWAY BUT IT NEEDS TO BE PREFECT, UKNOW?
+tsp_fnc_animate_sling = {  //-- FUCK FUCK FUCK FUCK I DONT LIKE IT MAKE IT GO AWAY
     params ["_unit", ["_sling", false], ["_holster", false], ["_drawPistol", false], ["_drawLauncher", false], ["_unsling", false], ["_time", 0], ["_slung", (_this#0) getVariable ["tsp_slung", []]]];
     _knife = if (!isNil "tsp_fnc_melee_weapon") then {!([_unit, handGunWeapon _unit] call tsp_fnc_melee_weapon in ["", "pistol"])} else {false};
     if (_sling) then {
